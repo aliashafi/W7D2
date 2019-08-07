@@ -1,0 +1,17 @@
+<% content_for :header %>
+
+<br>
+
+<form class='signin' action="<%=sessions_url%>" method="POST">
+    <%= auth_token %>
+    <label>Username:
+        <input type="text" name="user[email]" value="">
+    </label>
+    <br>
+    <label>Password:
+        <input type="password" name="user[password]" value="">
+    </label>
+    <br>
+
+    <input type="submit" value="Log In">
+</form>

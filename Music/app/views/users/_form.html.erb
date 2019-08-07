@@ -1,0 +1,29 @@
+
+<%if type == :new %>
+    <% action_url = users_url %>
+    <% button_text = "sign_up" %>
+<% else %>
+    <% action_url = user_url(@user) %>
+    <% button_text = 'edit_profile'%>
+<% end %>
+
+<h1>Welcome to the Music Site</h1>
+<h2>Sign Up</h2>
+
+<form action="<%= action_url %>" method='POST'>
+<%= auth_token %>
+    <% if type == :edit %>
+        <input type="hidden" name="_method" value='PATCH'>
+    <% end %>
+
+    <label> Username:   
+        <input type="text" name="user[email]" value= <%=@user.email%>>
+    </label>
+
+    <label> Password:   
+        <input type="password" name="user[password]" value="">
+    </label>
+
+    <input type="submit" value="<%= button_text %>">
+
+</form>

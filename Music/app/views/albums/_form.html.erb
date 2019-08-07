@@ -1,0 +1,48 @@
+<% if type == :new %>
+    <% action_url = albums_url %>
+<% else %>
+    <% action_url = album_url(@album) %>
+<% end %>
+
+
+<form class='add_album' action="<%=action_url%>" method="post">
+<% if type == :edit %>
+    <input type="hidden" name="_method" value="patch">
+    <h2> Edit Album</h2>
+<% else %>
+    <h2> Add Album </h2>
+<% end %>
+
+<%= auth_token %>
+<br>
+    <label>Band Name
+        <select name="album[band_id]">
+        <option disabled <%= album.band_id ? "" : "selected" %> > ---Please Select---</option>
+            <% Band.all.each do |band| %>
+                <option value="<%= band.id %>" <%= album.band_id && album.band.name == band.name ? "selected" : "" %>> <%= band.name %> </option>
+            <% end %>
+        </select>
+    </label>
+    <br>
+    <label>Album Title
+        <input type="text" name="album[title]" value="<%=album.title%>">
+    </label>
+
+    <br>
+
+     <label>Year
+        <input type="text" name="album[year]" value="<%=album.year%>">
+    </label>
+
+    <br>
+
+     <label>Album Type
+        <input type="radio" name="album[record_type]" value= <%= false %> <%= "checked" if album.record_type == false %> >Live
+        <input type="radio" name="album[record_type]" value= <%= true %> <%= "checked" if album.record_type == true %> >Studio
+    </label>
+
+    <br>
+
+    <input type="submit" value="Add Album">
+
+    </form>
